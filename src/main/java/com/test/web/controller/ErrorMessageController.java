@@ -1,5 +1,6 @@
 package com.test.web.controller;
 
+import com.test.web.ErrorMessageDto;
 import com.test.web.domain.ErrorMessage;
 import com.test.web.service.ErrorMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * * User: weimeng
@@ -17,18 +17,22 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Controller
 public class ErrorMessageController {
-    private AtomicInteger counter = new AtomicInteger(1);
 
     @Autowired
     private ErrorMessageService service;
 
-    @RequestMapping(value = "/insertOne", method = RequestMethod.GET)
-    public String insertOne() {
-        String code = "00" + counter.getAndIncrement();
-        String message = code + "_message";
-        service.insertOne(code, message);
+    @RequestMapping(value = "/addPage", method = RequestMethod.GET)
+    public String showAdd() {
 
-        return "success";
+        return "add";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String add(ErrorMessageDto errorMessageDto) {
+
+        service.insertOne(errorMessageDto.getCode(), errorMessageDto.getMessage());
+
+        return "redirect:/list";
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
