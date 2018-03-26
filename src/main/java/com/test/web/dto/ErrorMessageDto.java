@@ -1,4 +1,4 @@
-package com.test.web;
+package com.test.web.dto;
 
 /**
  * User: weimeng

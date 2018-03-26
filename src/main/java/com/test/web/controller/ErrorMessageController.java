@@ -1,6 +1,6 @@
 package com.test.web.controller;
 
-import com.test.web.ErrorMessageDto;
+import com.test.web.dto.ErrorMessageDto;
 import com.test.web.domain.ErrorMessage;
 import com.test.web.service.ErrorMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
