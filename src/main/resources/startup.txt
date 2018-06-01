@@ -1,0 +1,7 @@
+https://www.cnblogs.com/mercurys/p/7685102.html
+
+6.添加maven spring boot插件，将pom文件打包方式改成war。
+7.执行springboot:run。可以看到程序正常运行。
+
+8.也可以用maven package打包部署到tomcat。执行mvn:package。
+
