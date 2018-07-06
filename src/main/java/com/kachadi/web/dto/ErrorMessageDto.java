@@ -1,4 +1,4 @@
-package com.test.web.dto;
+package com.kachadi.web.dto;
 
 /**
  * User: weimeng

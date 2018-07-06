@@ -1,4 +1,4 @@
-package com.test.web.domain;
+package com.kachadi.web.domain;
 
 import org.hibernate.annotations.GenericGenerator;
 

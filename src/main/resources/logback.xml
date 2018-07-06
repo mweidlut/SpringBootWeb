@@ -11,7 +11,7 @@
     </appender>
 
     <!-- project default level -->
-    <logger name="com.test" level="INFO" />
+    <logger name="com.kachadi" level="INFO" />
 
     <root level="INFO">
         <appender-ref ref="console" />

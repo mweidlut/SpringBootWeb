@@ -1,7 +1,7 @@
-package com.test.web.service;
+package com.kachadi.web.service;
 
-import com.test.web.domain.ErrorMessage;
-import com.test.web.repo.ErrorMessageRepo;
+import com.kachadi.web.domain.ErrorMessage;
+import com.kachadi.web.repo.ErrorMessageRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

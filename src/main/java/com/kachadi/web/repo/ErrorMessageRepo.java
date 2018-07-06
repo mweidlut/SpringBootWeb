@@ -1,6 +1,6 @@
-package com.test.web.repo;
+package com.kachadi.web.repo;
 
-import com.test.web.domain.ErrorMessage;
+import com.kachadi.web.domain.ErrorMessage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

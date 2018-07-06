@@ -1,8 +1,8 @@
-package com.test.web.controller;
+package com.kachadi.web.controller;
 
-import com.test.web.dto.ErrorMessageDto;
-import com.test.web.domain.ErrorMessage;
-import com.test.web.service.ErrorMessageService;
+import com.kachadi.web.dto.ErrorMessageDto;
+import com.kachadi.web.domain.ErrorMessage;
+import com.kachadi.web.service.ErrorMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +20,12 @@ public class ErrorMessageController {
 
     @Autowired
     private ErrorMessageService service;
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index() {
+
+        return "index";
+    }
 
     @RequestMapping(value = "/addPage", method = RequestMethod.GET)
     public String showAdd() {
