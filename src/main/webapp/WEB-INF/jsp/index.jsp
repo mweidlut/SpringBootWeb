@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>简单地图</title>
+    <title>咔嚓地</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <style type="text/css">
         html,body{
@@ -39,7 +39,7 @@
                 //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
                 var map = new qq.maps.Map(document.getElementById("container"), {
                     center: new qq.maps.LatLng(39.916527,116.397128),      // 地图的中心地理坐标。
-                    zoom:1                                                 // 地图的中心地理坐标。
+                    zoom:4                                                 // 地图的中心地理坐标。
                 });
             }
 
