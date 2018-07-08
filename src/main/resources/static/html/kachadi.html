@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>咔嚓地</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/kachadi.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
+    <script>
+        'use strict';
+        //直接加载地图
+        window.onload = function () {
+            initMap();
+            initDropZone();
+        }
+
+        //初始化地图函数  自定义函数名initMap
+        function initMap() {
+            //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+            var map = new qq.maps.Map(document.getElementById("mapContainer"), {
+                center: new qq.maps.LatLng(39.916527, 116.397128),      // 地图的中心地理坐标。
+                zoom: 1                                                 // 地图的中心地理坐标。
+            });
+        }
+
+        function initDropZone() {
+            var dropZone = document.getElementById('drop-zone');
+            //var uploadForm = document.getElementById('js-upload-form');
+
+            var startUpload = function(files) {
+                console.log(files)
+
+                uploadImage(files[0]);
+            }
+
+            /*uploadForm.addEventListener('submit', function(e) {
+                var uploadFiles = document.getElementById('js-upload-files').files;
+                e.preventDefault()
+
+                startUpload(uploadFiles)
+            })*/
+
+            dropZone.ondrop = function(e) {
+                e.preventDefault();
+                this.className = 'upload-drop-zone';
+
+                startUpload(e.dataTransfer.files)
+            }
+
+            dropZone.ondragover = function() {
+                this.className = 'upload-drop-zone drop';
+                return false;
+            }
+
+            dropZone.ondragleave = function() {
+                this.className = 'upload-drop-zone';
+                return false;
+            }
+        }
+
+        function uploadImage(fileData) {
+            var formData = new FormData();
+            formData.append("file", fileData);
+            $.ajax({
+                url:"/upload/image",
+                type:"POST",
+                data:formData,
+                processData:false,
+                contentType:false,
+                async:false,
+                dataType:"json",
+                success:function(data){
+                    //window.clearInterval(timer);
+                    console.log("over.." + data.heightPix);
+                }
+            });
+        }
+
+    </script>
+
+</head>
+<body>
+<header class="middle">
+    <!--<button type="" name="" value="">选择照片</button>-->
+</header>
+<main>
+    <div class="left">
+        <div id="first" style="height: 250px">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="text-align: center;"><strong>咔嚓地-在哪儿拍的照片?</strong></div>
+                <div class="panel-body">
+
+                    <!-- Standar Form -->
+                    <!--<h4>请选择文件</h4>
+                    <form action="" method="post" enctype="multipart/form-data" id="js-upload-form">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <input type="file" name="files[]" id="js-upload-files" multiple>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">上传</button>
+                        </div>
+                    </form>-->
+
+                    <!-- Drop Zone -->
+                    <div class="upload-drop-zone" id="drop-zone">
+                        拖拽照片到这里
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <!--<div class="progress">-->
+                        <!--<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">-->
+                            <!--<span class="sr-only">已上传 50% </span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!-- Upload Finished -->
+                    <!--<div class="js-upload-finished">-->
+                        <!--<h3>已上传文件</h3>-->
+                        <!--<div class="list-group">-->
+                            <!--<a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>-->
+                            <!--<a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+
+        <!--广告-->
+        <!--<div id="second" style="height: 250px; float: bottom ">
+            <text>这里放点什么呢，广告？这辈子都不可在这个位置放广告的...</text>
+        </div>-->
+
+    </div>
+    <div class="right" id="mapContainer"></div>
+</main>
+</body>
+</html>

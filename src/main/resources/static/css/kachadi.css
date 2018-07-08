@@ -1,0 +1,59 @@
+body {
+    font-family: 微软雅黑;
+    background-color: rgb(239, 239, 239);
+    height: 100%;
+    margin: 0;
+    display: block;
+}
+
+header {
+    height: 1px;
+    padding: 0 10px;
+}
+
+main {
+    position: absolute;
+    top: 1px;
+    bottom: 10px;
+    width: 100%;
+}
+
+.middle {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.left {
+    position: fixed;
+    width: 15%;
+    float: left;
+    height: 100%;
+}
+
+.right {
+    position: fixed;
+    width: 85%;
+    float: right;
+    height: 100%;
+}
+
+.upload-drop-zone {
+    height: 200px;
+    border-width: 2px;
+    margin-bottom: 20px;
+}
+
+/* skin.css Style*/
+.upload-drop-zone {
+    color: #ccc;
+    border-style: dashed;
+    border-color: #ccc;
+    line-height: 200px;
+    text-align: center
+}
+.upload-drop-zone.drop {
+    color: #222;
+    border-color: #222;
+}
