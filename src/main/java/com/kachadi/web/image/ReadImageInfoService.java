@@ -6,11 +6,14 @@ import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.kachadi.web.dto.ImageInfoDto;
+import com.kachadi.web.enums.ImagePropEnum;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 /**
  * 读取照片信息
@@ -18,31 +21,58 @@ import java.io.InputStream;
 @Service
 public class ReadImageInfoService {
 
-    public ImageInfoDto readImageInfo(InputStream inputStream){
-        ImageInfoDto imageInfoDto = new ImageInfoDto();
 
+    public static void main(String[] args) throws Exception{
+        File jpegFile = new File("C:\\Users\\ROOT\\Desktop\\tianniu.jpg");
+        FileInputStream inputStream = new FileInputStream(jpegFile);
 
-
-        return imageInfoDto;
+        ImageInfoDto imageInfoDto = new ReadImageInfoService().readImageInfo(inputStream);
+        System.out.println(imageInfoDto);
     }
 
-    public static void main(String[] args) {
-        long now = System.currentTimeMillis();
+    public ImageInfoDto readImageInfo(InputStream inputStream) {
 
-        File jpegFile = new File("C:\\Users\\Public\\Pictures\\Sample Pictures\\image-1.jpg");
+        Metadata metadata = null;
         try {
-            Metadata metadata = ImageMetadataReader.readMetadata(jpegFile);
-            for (Directory directory : metadata.getDirectories()) {
-                for (Tag tag : directory.getTags()) {
-                    System.out.println(tag);
-                }
-            }
+            metadata = ImageMetadataReader.readMetadata(inputStream);
         } catch (ImageProcessingException e) {
             e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
 
-        System.out.println((System.currentTimeMillis() - now) / 1000D);
+        if (Objects.isNull(metadata)) {
+            throw new RuntimeException("未能读取照片，请换一张原图");
+        }
+
+        ImageInfoDto imageInfoDto = new ImageInfoDto();
+        for (Directory directory : metadata.getDirectories()) {
+            for (Tag tag : directory.getTags()) {
+
+                if (ImagePropEnum.Make.prop.equals(tag.getTagName())){
+                    imageInfoDto.setMake(tag.getDescription());
+                }
+                if (ImagePropEnum.Model.prop.equals(tag.getTagName())){
+                    imageInfoDto.setModel(tag.getDescription());
+                }
+                if (ImagePropEnum.Date_Time.prop.equals(tag.getTagName())){
+                    imageInfoDto.setDateTime(tag.getDescription());
+                }
+                if (ImagePropEnum.Image_Height.prop.equals(tag.getTagName())){
+                    imageInfoDto.setHeightPix(tag.getDescription());
+                }
+                if (ImagePropEnum.Image_Width.prop.equals(tag.getTagName())){
+                    imageInfoDto.setWidthPix(tag.getDescription());
+                }
+                if (ImagePropEnum.GPS_Longitude.prop.equals(tag.getTagName())){
+                    imageInfoDto.setGpsLongitude(tag.getDescription());
+                }
+                if (ImagePropEnum.GPS_Latitude.prop.equals(tag.getTagName())){
+                    imageInfoDto.setGpsLatitude(tag.getDescription());
+                }
+            }
+        }
+
+        return imageInfoDto;
     }
 }

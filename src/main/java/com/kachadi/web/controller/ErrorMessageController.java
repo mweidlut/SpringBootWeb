@@ -21,12 +21,6 @@ public class ErrorMessageController {
     @Autowired
     private ErrorMessageService service;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
-
-        return "index";
-    }
-
     @RequestMapping(value = "/addPage", method = RequestMethod.GET)
     public String showAdd() {
 

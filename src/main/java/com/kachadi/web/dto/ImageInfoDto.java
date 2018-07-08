@@ -6,13 +6,27 @@ public class ImageInfoDto {
     private String make;  //品牌 - Make
     private String model; //型号 - Model
 
-    private String time;  //日期时间 - Date/Time
+    private String dateTime;  //日期时间 - Date/Time
 
     private String heightPix; //高 - Image Height
     private String widthPix;  //宽 - Image Width
 
     private String gpsLatitude; //纬度 - GPS Longitude
     private String gpsLongitude; //精度 - GPS Latitude
+
+
+    @Override
+    public String toString() {
+        return "ImageInfoDto{" +
+                "make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", dateTime='" + dateTime + '\'' +
+                ", heightPix='" + heightPix + '\'' +
+                ", widthPix='" + widthPix + '\'' +
+                ", gpsLatitude='" + gpsLatitude + '\'' +
+                ", gpsLongitude='" + gpsLongitude + '\'' +
+                '}';
+    }
 
     public String getMake() {
         return make;
@@ -30,12 +44,12 @@ public class ImageInfoDto {
         this.model = model;
     }
 
-    public String getTime() {
-        return time;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getHeightPix() {
