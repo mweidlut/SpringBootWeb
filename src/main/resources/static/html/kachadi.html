@@ -12,6 +12,8 @@
     <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
     <script>
         'use strict';
+
+        var thisMap;
         //直接加载地图
         window.onload = function () {
             initMap();
@@ -21,10 +23,12 @@
         //初始化地图函数  自定义函数名initMap
         function initMap() {
             //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
-            var map = new qq.maps.Map(document.getElementById("mapContainer"), {
+            thisMap = new qq.maps.Map(document.getElementById("mapContainer"), {
                 center: new qq.maps.LatLng(39.916527, 116.397128),      // 地图的中心地理坐标。
                 zoom: 1                                                 // 地图的中心地理坐标。
             });
+
+            thisMap;
         }
 
         function initDropZone() {
@@ -75,7 +79,16 @@
                 dataType:"json",
                 success:function(data){
                     //window.clearInterval(timer);
-                    console.log("over.." + data.heightPix);
+                    console.log("over.." + data.gpsLatitude+"__"+data.gpsLongitude);
+
+                    var here = new qq.maps.LatLng(data.gpsLatitude, data.gpsLongitude);
+                    var marker = new qq.maps.Marker({
+                        position: here,
+                        map: thisMap
+                    });
+
+                    thisMap.panTo(here);
+                    thisMap.zoomTo(14);
                 }
             });
         }
